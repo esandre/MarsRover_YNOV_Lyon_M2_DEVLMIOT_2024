@@ -2,7 +2,7 @@
 
 public class Rover
 {
-    private Orientation Orientation { get; }
+    public Orientation Orientation { get; private set; }
 
     public Rover(Orientation orientation, int positionX = 0)
     {
@@ -24,5 +24,10 @@ public class Rover
     {
         var vecteurX = Orientation == Orientation.Nord ? -1 : Orientation == Orientation.Sud ? 1 : 0;
         return new Rover(Orientation, X + vecteurX);
+    }
+
+    public Rover TournerADroite()
+    {
+        return this;
     }
 }
