@@ -2,16 +2,25 @@
 
 public class RotationTest
 {
-    [Fact]
-    public void Tourner_A_Droite_Depuis_Le_Nord_Amène_A_L_Est()
+    public static IEnumerable<object[]> Cas_Tourner_A_Droite()
     {
-        // ETANT DONNE un Rover orienté Nord
-        var rover = new Rover(Orientation.Nord);
+        yield return [Orientation.Nord, Orientation.Est];
+        yield return [Orientation.Est, Orientation.Sud];
+        yield return [Orientation.Sud, Orientation.Ouest];
+        yield return [Orientation.Ouest, Orientation.Nord];
+    }
+
+    [Theory]
+    [MemberData(nameof(Cas_Tourner_A_Droite))]
+    public void Tourner_A_Droite(Orientation origine, Orientation destination)
+    {
+        // ETANT DONNE un Rover orienté <origine>
+        var rover = new Rover(origine);
 
         // QUAND il tourne à droite
         rover = rover.TournerADroite();
 
-        // ALORS il est orienté Est
-        Assert.Equal(Orientation.Est, rover.Orientation);
+        // ALORS il est orienté <destination>
+        Assert.Equal(destination, rover.Orientation);
     }
 }
