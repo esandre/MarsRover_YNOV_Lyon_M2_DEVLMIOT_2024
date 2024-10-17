@@ -30,11 +30,11 @@ public class Rover
 
     public Rover TournerADroite()
     {
-        var orientationSuivate = Orientation.Nord;
-        if(Orientation == Orientation.Nord) orientationSuivate = Orientation.Est;
-        if(Orientation == Orientation.Est) orientationSuivate = Orientation.Sud;
-        if(Orientation == Orientation.Sud) orientationSuivate = Orientation.Ouest;
-        return new Rover(orientationSuivate);
+        var orientationSuivante = Orientation.Nord;
+        if(Orientation == Orientation.Nord) orientationSuivante = Orientation.Est;
+        if(Orientation == Orientation.Est) orientationSuivante = Orientation.Sud;
+        if(Orientation == Orientation.Sud) orientationSuivante = Orientation.Ouest;
+        return new Rover(orientationSuivante, X, Y);
     }
 
     public Rover TournerAGauche()
