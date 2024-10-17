@@ -20,22 +20,15 @@ public class Rover
 
     public Rover Avancer()
     {
-        var vecteurX = Orientation == Orientation.Nord ? 1 : Orientation == Orientation.Sud ? -1 : 0;
-        var vecteurY = Orientation == Orientation.Est ? 1 : Orientation == Orientation.Ouest ? - 1 : 0;
+        var vecteurX = Orientation.VecteurX;
+        var vecteurY = Orientation.VecteurY;
 
         return new Rover(Orientation, _planète, X + vecteurX, Y + vecteurY);
     }
 
     public Rover Reculer() => TournerADroite().TournerADroite().Avancer().TournerADroite().TournerADroite();
 
-    public Rover TournerADroite()
-    {
-        var orientationSuivante = Orientation.Nord;
-        if(Orientation == Orientation.Nord) orientationSuivante = Orientation.Est;
-        if(Orientation == Orientation.Est) orientationSuivante = Orientation.Sud;
-        if(Orientation == Orientation.Sud) orientationSuivante = Orientation.Ouest;
-        return new Rover(orientationSuivante, _planète, X, Y);
-    }
+    public Rover TournerADroite() => new(Orientation.RotationHoraire(), _planète, X, Y);
 
     public Rover TournerAGauche() => TournerADroite().TournerADroite().TournerADroite();
 }

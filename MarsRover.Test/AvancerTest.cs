@@ -4,15 +4,24 @@ namespace MarsRover.Test;
 
 public class AvancerTest
 {
+    // TODO : BeforeTest
+
+    public static IEnumerable<object[]> NombreIncrémentsTestés()
+    {
+        yield return [1];
+        yield return [2];
+        yield return [100];
+    }
+
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(100)]
+    [MemberData(nameof(NombreIncrémentsTestés))]
     public void Avancer_Nord_Incrémente_X_N_Fois(int nombreItérations)
     {
         // ETANT DONNE un Rover orienté Nord
-        var roverInitial = new Rover(Orientation.Nord, new PlanèteInfinie());
-
+        var roverInitial = new RoverBuilder()
+            .Orienté(Orientation.Nord)
+            .Build();
+            
         // QUAND il avance <nombreItérations> fois
         var roverFinal = roverInitial;
         for (var i = 0; i < nombreItérations; i++)
@@ -23,13 +32,13 @@ public class AvancerTest
     }
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(100)]
+    [MemberData(nameof(NombreIncrémentsTestés))]
     public void Avancer_Sud_Décrémente_X_N_Fois(int nombreItérations)
     {
-        // ETANT DONNE un Rover orienté Nord
-        var roverInitial = new Rover(Orientation.Sud, new PlanèteInfinie());
+        // ETANT DONNE un Rover orienté Sud
+        var roverInitial = new RoverBuilder()
+            .Orienté(Orientation.Sud)
+            .Build();
 
         // QUAND il avance <nombreItérations> fois
         var roverFinal = roverInitial;
@@ -41,13 +50,13 @@ public class AvancerTest
     }
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(100)]
+    [MemberData(nameof(NombreIncrémentsTestés))]
     public void Avancer_Est_Incrémente_Y(int nombreItérations)
     {
         // ETANT DONNE un Rover orienté Est
-        var roverInitial = new Rover(Orientation.Est, new PlanèteInfinie());
+        var roverInitial = new RoverBuilder()
+            .Orienté(Orientation.Est)
+            .Build();
 
         // QUAND il avance <nombreItérations> fois
         var roverFinal = roverInitial;
@@ -59,13 +68,13 @@ public class AvancerTest
     }
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    [InlineData(100)]
+    [MemberData(nameof(NombreIncrémentsTestés))]
     public void Avancer_Ouest_Décrémente_Y(int nombreItérations)
     {
         // ETANT DONNE un Rover orienté Ouest
-        var roverInitial = new Rover(Orientation.Ouest, new PlanèteInfinie());
+        var roverInitial = new RoverBuilder()
+            .Orienté(Orientation.Ouest)
+            .Build();
 
         // QUAND il avance <nombreItérations> fois
         var roverFinal = roverInitial;
@@ -93,7 +102,9 @@ public class AvancerTest
     public void Mouvement_Latitudinal_Ne_Modifie_Pas_X(Orientation origine)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var roverInitial = new Rover(origine, new PlanèteInfinie());
+        var roverInitial = new RoverBuilder()
+            .Orienté(origine)
+            .Build();
 
         // QUAND il avance
         var roverFinal = roverInitial.Avancer();
@@ -107,7 +118,9 @@ public class AvancerTest
     public void Mouvement_Longitudinal_Ne_Modifie_Pas_Y(Orientation origine)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var roverInitial = new Rover(origine, new PlanèteInfinie());
+        var roverInitial = new RoverBuilder()
+            .Orienté(origine)
+            .Build();
 
         // QUAND il avance
         var roverFinal = roverInitial.Avancer();
