@@ -1,5 +1,3 @@
-using System.Reflection.Emit;
-
 namespace MarsRover.Test;
 
 public class AvancerTest

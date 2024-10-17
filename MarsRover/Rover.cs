@@ -36,4 +36,9 @@ public class Rover
         if(Orientation == Orientation.Sud) orientationSuivate = Orientation.Ouest;
         return new Rover(orientationSuivate);
     }
+
+    public Rover TournerAGauche()
+    {
+        return TournerADroite().TournerADroite().TournerADroite();
+    }
 }
