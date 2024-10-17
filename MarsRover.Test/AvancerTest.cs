@@ -38,32 +38,6 @@ public class AvancerTest
         Assert.Equal(-nombreItérations, roverFinal.X - roverInitial.X);
     }
 
-    [Fact]
-    public void Avancer_Est_Ne_Modifie_Pas_X()
-    {
-        // ETANT DONNE un Rover orienté Est
-        var roverInitial = new Rover(Orientation.Est);
-
-        // QUAND il avance
-        var roverFinal = roverInitial.Avancer();
-
-        // ALORS sa coordonnée X n'a pas bougé
-        Assert.Equal(0, roverFinal.X - roverInitial.X);
-    }
-
-    [Fact]
-    public void Avancer_Ouest_Ne_Modifie_Pas_X()
-    {
-        // ETANT DONNE un Rover orienté Ouest
-        var roverInitial = new Rover(Orientation.Ouest);
-
-        // QUAND il avance
-        var roverFinal = roverInitial.Avancer();
-
-        // ALORS sa coordonnée X n'a pas bougé
-        Assert.Equal(0, roverFinal.X - roverInitial.X);
-    }
-
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
@@ -100,24 +74,38 @@ public class AvancerTest
         Assert.Equal(-nombreItérations, roverFinal.Y - roverInitial.Y);
     }
 
-    [Fact]
-    public void Avancer_Nord_Ne_Modifie_Pas_Y()
+    public static IEnumerable<object[]> Cas_Mouvement_Latitudinal_Ne_Modifie_Pas_X()
     {
-        // ETANT DONNE un Rover orienté Nord
-        var roverInitial = new Rover(Orientation.Nord);
+        yield return [Orientation.Est];
+        yield return [Orientation.Ouest];
+    }
+
+    public static IEnumerable<object[]> Cas_Mouvement_Longitudinal_Ne_Modifie_Pas_Y()
+    {
+        yield return [Orientation.Nord];
+        yield return [Orientation.Sud];
+    }
+
+    [Theory]
+    [MemberData(nameof(Cas_Mouvement_Latitudinal_Ne_Modifie_Pas_X))]
+    public void Mouvement_Latitudinal_Ne_Modifie_Pas_X(Orientation origine)
+    {
+        // ETANT DONNE un Rover orienté <origine>
+        var roverInitial = new Rover(origine);
 
         // QUAND il avance
         var roverFinal = roverInitial.Avancer();
 
-        // ALORS sa coordonnée Y n'a pas bougé
-        Assert.Equal(0, roverFinal.Y - roverInitial.Y);
+        // ALORS sa coordonnée X n'a pas bougé
+        Assert.Equal(0, roverFinal.X - roverInitial.X);
     }
 
-    [Fact]
-    public void Avancer_Sud_Ne_Modifie_Pas_Y()
+    [Theory]
+    [MemberData(nameof(Cas_Mouvement_Longitudinal_Ne_Modifie_Pas_Y))]
+    public void Mouvement_Longitudinal_Ne_Modifie_Pas_Y(Orientation origine)
     {
-        // ETANT DONNE un Rover orienté Sud
-        var roverInitial = new Rover(Orientation.Sud);
+        // ETANT DONNE un Rover orienté <origine>
+        var roverInitial = new Rover(origine);
 
         // QUAND il avance
         var roverFinal = roverInitial.Avancer();

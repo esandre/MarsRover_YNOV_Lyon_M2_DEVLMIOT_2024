@@ -23,5 +23,6 @@ public class ReculerTest
         // ALORS il est à la même position qu'un Rover orienté <opposé> avançant
         var roverTémoin = new Rover(opposée).Avancer();
         Assert.Equal(roverTémoin.X, roverTesté.X);
+        Assert.Equal(roverTémoin.Y, roverTesté.Y);
     }
 }

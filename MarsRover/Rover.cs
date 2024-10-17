@@ -24,8 +24,7 @@ public class Rover
 
     public Rover Reculer()
     {
-        var vecteurX = Orientation == Orientation.Nord ? -1 : Orientation == Orientation.Sud ? 1 : 0;
-        return new Rover(Orientation, X + vecteurX);
+        return TournerADroite().TournerADroite().Avancer().TournerADroite().TournerADroite();
     }
 
     public Rover TournerADroite()
