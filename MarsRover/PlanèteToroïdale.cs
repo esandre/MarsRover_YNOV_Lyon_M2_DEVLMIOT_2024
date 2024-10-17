@@ -1,9 +1,15 @@
 ﻿namespace MarsRover;
 
-public class PlanèteToroïdale
+public class PlanèteToroïdale : IPlanète
 {
     public PlanèteToroïdale(int taille)
     {
-        throw new ArgumentOutOfRangeException();
+        if (taille == 0)
+            throw new ArgumentOutOfRangeException();
+    }
+
+    public (int X, int Y) Normaliser(int x, int y)
+    {
+        return (0, 0);
     }
 }

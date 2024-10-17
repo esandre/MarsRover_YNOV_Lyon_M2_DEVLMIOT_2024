@@ -1,4 +1,6 @@
-﻿namespace MarsRover.Test;
+﻿using MarsRover.Test.Utilities;
+
+namespace MarsRover.Test;
 
 public class ReculerTest
 {
@@ -15,13 +17,13 @@ public class ReculerTest
     public void Reculer_Equivaut_A_Avancer_Depuis_Opposé(Orientation origine, Orientation opposée)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var roverTesté = new Rover(origine);
+        var roverTesté = new Rover(origine, new PlanèteInfinie());
 
         // QUAND il recule
         roverTesté = roverTesté.Reculer();
 
         // ALORS il est à la même position qu'un Rover orienté <opposé> avançant
-        var roverTémoin = new Rover(opposée).Avancer();
+        var roverTémoin = new Rover(opposée, new PlanèteInfinie()).Avancer();
         Assert.Equal(roverTémoin.X, roverTesté.X);
         Assert.Equal(roverTémoin.Y, roverTesté.Y);
     }

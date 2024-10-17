@@ -1,3 +1,5 @@
+using MarsRover.Test.Utilities;
+
 namespace MarsRover.Test;
 
 public class AvancerTest
@@ -9,7 +11,7 @@ public class AvancerTest
     public void Avancer_Nord_Incrémente_X_N_Fois(int nombreItérations)
     {
         // ETANT DONNE un Rover orienté Nord
-        var roverInitial = new Rover(Orientation.Nord);
+        var roverInitial = new Rover(Orientation.Nord, new PlanèteInfinie());
 
         // QUAND il avance <nombreItérations> fois
         var roverFinal = roverInitial;
@@ -27,7 +29,7 @@ public class AvancerTest
     public void Avancer_Sud_Décrémente_X_N_Fois(int nombreItérations)
     {
         // ETANT DONNE un Rover orienté Nord
-        var roverInitial = new Rover(Orientation.Sud);
+        var roverInitial = new Rover(Orientation.Sud, new PlanèteInfinie());
 
         // QUAND il avance <nombreItérations> fois
         var roverFinal = roverInitial;
@@ -45,7 +47,7 @@ public class AvancerTest
     public void Avancer_Est_Incrémente_Y(int nombreItérations)
     {
         // ETANT DONNE un Rover orienté Est
-        var roverInitial = new Rover(Orientation.Est);
+        var roverInitial = new Rover(Orientation.Est, new PlanèteInfinie());
 
         // QUAND il avance <nombreItérations> fois
         var roverFinal = roverInitial;
@@ -63,7 +65,7 @@ public class AvancerTest
     public void Avancer_Ouest_Décrémente_Y(int nombreItérations)
     {
         // ETANT DONNE un Rover orienté Ouest
-        var roverInitial = new Rover(Orientation.Ouest);
+        var roverInitial = new Rover(Orientation.Ouest, new PlanèteInfinie());
 
         // QUAND il avance <nombreItérations> fois
         var roverFinal = roverInitial;
@@ -91,7 +93,7 @@ public class AvancerTest
     public void Mouvement_Latitudinal_Ne_Modifie_Pas_X(Orientation origine)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var roverInitial = new Rover(origine);
+        var roverInitial = new Rover(origine, new PlanèteInfinie());
 
         // QUAND il avance
         var roverFinal = roverInitial.Avancer();
@@ -105,7 +107,7 @@ public class AvancerTest
     public void Mouvement_Longitudinal_Ne_Modifie_Pas_Y(Orientation origine)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var roverInitial = new Rover(origine);
+        var roverInitial = new Rover(origine, new PlanèteInfinie());
 
         // QUAND il avance
         var roverFinal = roverInitial.Avancer();

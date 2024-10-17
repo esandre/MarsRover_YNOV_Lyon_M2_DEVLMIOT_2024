@@ -2,10 +2,15 @@
 
 public class Rover
 {
-    public Orientation Orientation { get; }
+    private readonly IPlanète _planète;
 
-    public Rover(Orientation orientation, int positionX = 0, int positionY = 0)
+    public Orientation Orientation { get; }
+    public int Y { get; }
+    public int X { get; }
+
+    public Rover(Orientation orientation, IPlanète planète, int positionX = 0, int positionY = 0)
     {
+        _planète = planète;
         Orientation = orientation;
         X = positionX;
         Y = positionY;
@@ -15,17 +20,16 @@ public class Rover
     {
         var vecteurX = Orientation == Orientation.Nord ? 1 : Orientation == Orientation.Sud ? -1 : 0;
         var vecteurY = Orientation == Orientation.Est ? 1 : Orientation == Orientation.Ouest ? - 1 : 0;
-        return new Rover(Orientation, X + vecteurX, Y + vecteurY);
+
+        var positionProjetéeX = X + vecteurX;
+        var positionProjetéeY = Y + vecteurY;
+
+        var positionNormalisée = _planète.Normaliser(positionProjetéeX, positionProjetéeY);
+
+        return new Rover(Orientation, _planète, positionNormalisée.X, positionNormalisée.Y);
     }
 
-    public int Y { get; }
-
-    public int X { get; }
-
-    public Rover Reculer()
-    {
-        return TournerADroite().TournerADroite().Avancer().TournerADroite().TournerADroite();
-    }
+    public Rover Reculer() => TournerADroite().TournerADroite().Avancer().TournerADroite().TournerADroite();
 
     public Rover TournerADroite()
     {
@@ -33,11 +37,8 @@ public class Rover
         if(Orientation == Orientation.Nord) orientationSuivante = Orientation.Est;
         if(Orientation == Orientation.Est) orientationSuivante = Orientation.Sud;
         if(Orientation == Orientation.Sud) orientationSuivante = Orientation.Ouest;
-        return new Rover(orientationSuivante, X, Y);
+        return new Rover(orientationSuivante, _planète, X, Y);
     }
 
-    public Rover TournerAGauche()
-    {
-        return TournerADroite().TournerADroite().TournerADroite();
-    }
+    public Rover TournerAGauche() => TournerADroite().TournerADroite().TournerADroite();
 }
