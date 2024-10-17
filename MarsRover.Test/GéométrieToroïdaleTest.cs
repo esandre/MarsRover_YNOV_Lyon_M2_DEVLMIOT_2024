@@ -8,14 +8,28 @@ public class GéométrieToroïdaleTest
         Assert.Throws<ArgumentOutOfRangeException>(() => new PlanèteToroïdale(0));
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public void Taille_Un_Mouvement_Impossible(bool avancer)
+    public static IEnumerable<object[]> Cas_Taille_Un_Mouvement_Impossible()
     {
-        // ETANT DONNE un Rover sur une planète toroïdale de taille 1
+        Orientation[] orientations = [Orientation.Est, Orientation.Nord, Orientation.Ouest, Orientation.Sud];
+        bool[] avancerOuNon = [true, false];
+
+        foreach (var orientation in orientations)
+        foreach (var avancer in avancerOuNon)
+        {
+            yield return [orientation, 0, 0, avancer];
+            yield return [orientation, 1, 1, avancer];
+        }
+    }
+
+    [Theory]
+    [MemberData(nameof(Cas_Taille_Un_Mouvement_Impossible))]
+    public void Taille_Un_Mouvement_Impossible(Orientation origine, int xOrigine, int yOrigine, bool avancer)
+    {
+        // ETANT DONNE une planète toroïdale de taille 1
         var planète = new PlanèteToroïdale(1);
-        var roverInitial = new Rover(Orientation.Nord, planète: planète);
+
+        // ET un Rover orienté <origine> positionné <xOrigine>, <yOrigine> sur cette planète
+        var roverInitial = new Rover(origine, planète, xOrigine, yOrigine);
 
         // QUAND il avance ou recule
         var roverFinal = avancer ? roverInitial.Avancer() : roverInitial.Reculer();

@@ -12,8 +12,10 @@ public class Rover
     {
         _planète = planète;
         Orientation = orientation;
-        X = positionX;
-        Y = positionY;
+        var positionNormalisée = _planète.Normaliser(positionX, positionY);
+
+        X = positionNormalisée.X;
+        Y = positionNormalisée.Y;
     }
 
     public Rover Avancer()
@@ -21,12 +23,7 @@ public class Rover
         var vecteurX = Orientation == Orientation.Nord ? 1 : Orientation == Orientation.Sud ? -1 : 0;
         var vecteurY = Orientation == Orientation.Est ? 1 : Orientation == Orientation.Ouest ? - 1 : 0;
 
-        var positionProjetéeX = X + vecteurX;
-        var positionProjetéeY = Y + vecteurY;
-
-        var positionNormalisée = _planète.Normaliser(positionProjetéeX, positionProjetéeY);
-
-        return new Rover(Orientation, _planète, positionNormalisée.X, positionNormalisée.Y);
+        return new Rover(Orientation, _planète, X + vecteurX, Y + vecteurY);
     }
 
     public Rover Reculer() => TournerADroite().TournerADroite().Avancer().TournerADroite().TournerADroite();
