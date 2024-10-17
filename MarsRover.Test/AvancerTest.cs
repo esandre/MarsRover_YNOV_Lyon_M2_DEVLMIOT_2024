@@ -4,8 +4,6 @@ namespace MarsRover.Test;
 
 public class AvancerTest
 {
-    // TODO : BeforeTest
-
     public static IEnumerable<object[]> NombreIncrémentsTestés()
     {
         yield return [1];
