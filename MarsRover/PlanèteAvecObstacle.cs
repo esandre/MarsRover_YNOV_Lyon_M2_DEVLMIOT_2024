@@ -8,20 +8,16 @@ internal class PlanèteAvecObstacle : IPlanète
     public PlanèteAvecObstacle(IPlanète inner, Obstacle obstacle)
     {
         _inner = inner;
-        _obstacle = obstacle;
+
+        var coordonnéesObstacleNormalisée = inner.Normaliser(obstacle.X, obstacle.Y);
+        _obstacle = new Obstacle(coordonnéesObstacleNormalisée.X, coordonnéesObstacleNormalisée.Y);
     }
 
-    public (int X, int Y, bool Libre) Normaliser(int x, int y)
-    {
-        // TODO : potentiel bug de normalisation
-        return _inner.Normaliser(x, y) with { Libre = !_obstacle.Collisionne(x, y) };
-    }
+    public (int X, int Y, bool Libre) Normaliser(int x, int y) 
+        => _inner.Normaliser(x, y) with { Libre = !_obstacle.Collisionne(x, y) };
 }
 
 public record Obstacle(int X, int Y)
 {
-    public bool Collisionne(int x, int y)
-    {
-        return x == X && y == Y;
-    }
+    public bool Collisionne(int x, int y) => x == X && y == Y;
 }

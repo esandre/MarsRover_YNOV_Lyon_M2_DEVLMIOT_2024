@@ -27,6 +27,28 @@ public class ObstaclesTest
     }
 
     [Fact]
+    // Ce teste vise à se blinder contre la non-normalisation des coordonnées d'un obstacles avant comparaison.
+    public void ObstacleToroïdal()
+    {
+        // ETANT DONNE un obstacle en 2,2 sur une planète toroïdale de taille 2
+        var obstacle = new Obstacle(2, 2);
+        var planète = new PlanèteToroïdale(2)
+            .AjouterObstacle(obstacle);
+
+        // ET un Rover orienté Nord en 0,0
+        var builder = new RoverBuilder()
+            .Orienté(Orientation.Nord)
+            .Positionné(0, 0)
+            .SurLaPlanète(planète);
+
+        // QUAND le Rover atterrit
+        void Act() => builder.Build();
+
+        // ALORS une exception est lancée
+        Assert.Throws<PositionObstruéeException>(Act);
+    }
+
+    [Fact]
     public void AterrissageObstrué()
     {
         // ETANT DONNE un obstacle en 0, 0
