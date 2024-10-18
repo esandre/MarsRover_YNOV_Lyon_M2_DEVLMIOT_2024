@@ -11,4 +11,11 @@ public static class RoverInterpreter
             'G' => rover.TournerAGauche(),
             _ => throw new InvalidOperationException()
         };
+
+    public static Rover Recevoir(this Rover rover, string command)
+    {
+        foreach (var @char in command)
+            rover = rover.Recevoir(@char);
+        return rover;
+    }
 }
