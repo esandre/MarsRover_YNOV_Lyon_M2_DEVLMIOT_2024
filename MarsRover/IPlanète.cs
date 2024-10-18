@@ -2,5 +2,5 @@
 
 public interface IPlanète
 {
-    (int X, int Y) Normaliser(int x, int y);
+    (int X, int Y, bool Libre) Normaliser(int x, int y);
 }

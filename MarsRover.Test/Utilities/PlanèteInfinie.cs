@@ -2,8 +2,8 @@
 
 internal class PlanèteInfinie : IPlanète
 {
-    public (int X, int Y) Normaliser(int x, int y)
+    public (int X, int Y, bool Libre) Normaliser(int x, int y)
     {
-        return (x, y);
+        return (x, y, true);
     }
 }
