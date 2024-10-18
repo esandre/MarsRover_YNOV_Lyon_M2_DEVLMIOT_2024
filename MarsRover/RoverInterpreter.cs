@@ -2,6 +2,8 @@
 
 public static class RoverInterpreter
 {
+    private static readonly IEqualityComparer<Rover> Comparer = new RoverStateComparator();
+
     public static Rover Recevoir(this Rover rover, char command) =>
         command switch
         {
@@ -15,7 +17,14 @@ public static class RoverInterpreter
     public static Rover Recevoir(this Rover rover, string command)
     {
         foreach (var @char in command)
-            rover = rover.Recevoir(@char);
+        {
+            var roverFinal = rover.Recevoir(@char);
+            if (Comparer.Equals(rover, roverFinal)) 
+                return rover;
+
+            rover = roverFinal;
+        }
+
         return rover;
     }
 }

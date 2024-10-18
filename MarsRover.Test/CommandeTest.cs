@@ -78,4 +78,27 @@ public class CommandeTest
         Assert.Equal(roverTémoin.Y, roverTesté.Y);
         Assert.Equal(roverTémoin.Orientation, roverTesté.Orientation);
     }
+
+    [Fact]
+    public void SuiteCommandesAvecObstacle()
+    {
+        // ETANT DONNE un Obstacle en 1,0
+        var obstacle = new Obstacle(1, 0);
+
+        // ET un Rover orienté Nord en 0,0
+        var roverInitial = new RoverBuilder()
+            .AjouterObstacleSurPlanète(obstacle)
+            .Orienté(Orientation.Nord)
+            .Positionné(0, 0)
+            .Build();
+
+        // QUAND le Rover reçoit la commande "AR"
+        var roverFinal = roverInitial.Recevoir("AR");
+
+        // ALORS il n'a pas bougé
+        // Explication : A n'est pas possible (obstacle), R ne doit pas être exécuté. Le Rover ne bouge donc pas.
+        Assert.Equal(roverInitial.X, roverFinal.X);
+        Assert.Equal(roverInitial.Y, roverFinal.Y);
+        Assert.Equal(roverInitial.Orientation, roverFinal.Orientation);
+    }
 }
