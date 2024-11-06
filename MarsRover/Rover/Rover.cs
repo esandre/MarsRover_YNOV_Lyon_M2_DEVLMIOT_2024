@@ -2,7 +2,7 @@
 
 namespace MarsRover.Rover;
 
-public class Rover
+public class Rover : IRover
 {
     private readonly IPlanète _planète;
 
@@ -21,7 +21,7 @@ public class Rover
         Y = positionNormalisée.Y;
     }
 
-    public Rover Avancer()
+    public IRover Avancer()
     {
         var positionX = X + Orientation.VecteurX;
         var positionY = Y + Orientation.VecteurY;
@@ -33,9 +33,9 @@ public class Rover
             : new Rover(Orientation, _planète, positionNormalisée.X, positionNormalisée.Y);
     }
 
-    public Rover Reculer() => TournerADroite().TournerADroite().Avancer().TournerADroite().TournerADroite();
+    public IRover Reculer() => TournerADroite().TournerADroite().Avancer().TournerADroite().TournerADroite();
 
-    public Rover TournerADroite() => new(Orientation.RotationHoraire(), _planète, X, Y);
+    public IRover TournerADroite() => new Rover(Orientation.RotationHoraire(), _planète, X, Y);
 
-    public Rover TournerAGauche() => TournerADroite().TournerADroite().TournerADroite();
+    public IRover TournerAGauche() => TournerADroite().TournerADroite().TournerADroite();
 }

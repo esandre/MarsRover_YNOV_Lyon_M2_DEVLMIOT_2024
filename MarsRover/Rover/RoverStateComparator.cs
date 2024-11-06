@@ -1,8 +1,8 @@
 ﻿namespace MarsRover.Rover;
 
-internal class RoverStateComparator : IEqualityComparer<Rover>
+internal class RoverStateComparator : IEqualityComparer<IRover>
 {
-    public bool Equals(Rover? first, Rover? second)
+    public bool Equals(IRover? first, IRover? second)
     {
         if (ReferenceEquals(first, second)) return true;
         if (ReferenceEquals(first, null)) return false;
@@ -14,5 +14,5 @@ internal class RoverStateComparator : IEqualityComparer<Rover>
                && first.X == second.X;
     }
 
-    public int GetHashCode(Rover obj) => HashCode.Combine(obj.Orientation, obj.Y, obj.X);
+    public int GetHashCode(IRover obj) => HashCode.Combine(obj.Orientation, obj.Y, obj.X);
 }

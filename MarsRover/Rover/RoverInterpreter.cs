@@ -2,9 +2,9 @@
 
 public static class RoverInterpreter
 {
-    private static readonly IEqualityComparer<Rover> Comparer = new RoverStateComparator();
+    private static readonly IEqualityComparer<IRover> Comparer = new RoverStateComparator();
 
-    public static Rover Recevoir(this Rover rover, char command) =>
+    public static IRover Recevoir(this IRover rover, char command) =>
         command switch
         {
             'A' => rover.Avancer(),
@@ -14,7 +14,7 @@ public static class RoverInterpreter
             _ => throw new InvalidOperationException()
         };
 
-    public static Rover Recevoir(this Rover rover, string command)
+    public static IRover Recevoir(this IRover rover, string command)
     {
         foreach (var @char in command)
         {

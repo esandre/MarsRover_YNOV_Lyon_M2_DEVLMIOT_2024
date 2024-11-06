@@ -1,4 +1,5 @@
-﻿using MarsRover.Topologie;
+﻿using MarsRover.Rover;
+using MarsRover.Topologie;
 
 namespace MarsRover.Test.Utilities;
 
@@ -10,7 +11,7 @@ public class RoverBuilder
     private int _y;
     private IPlanète _planète = new PlanèteInfinie();
 
-    public Rover.Rover Build()
+    public IRover Build()
     {
         var planète = _planète;
         foreach (var obstacle in _obstacles)

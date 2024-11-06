@@ -1,4 +1,5 @@
-﻿using MarsRover.Test.Utilities;
+﻿using MarsRover.Rover;
+using MarsRover.Test.Utilities;
 using MarsRover.Topologie;
 
 namespace MarsRover.Test;
@@ -23,7 +24,7 @@ public class RotationTest
     public void Tourner_A_Droite(Orientation origine, Orientation destination)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var rover = new Rover.Rover(origine, new PlanèteInfinie());
+        IRover rover = new Rover.Rover(origine, new PlanèteInfinie());
 
         // QUAND il tourne à droite
         rover = rover.TournerADroite();
@@ -37,7 +38,7 @@ public class RotationTest
     public void Tourner_A_Gauche(Orientation origine, Orientation destination)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var rover = new Rover.Rover(origine, new PlanèteInfinie());
+        IRover rover = new Rover.Rover(origine, new PlanèteInfinie());
 
         // QUAND il tourne à gauche
         rover = rover.TournerAGauche();

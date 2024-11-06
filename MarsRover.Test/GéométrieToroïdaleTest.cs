@@ -1,4 +1,5 @@
-﻿using MarsRover.Topologie;
+﻿using MarsRover.Rover;
+using MarsRover.Topologie;
 
 namespace MarsRover.Test;
 
@@ -36,7 +37,7 @@ public class GéométrieToroïdaleTest
         var roverInitial = new Rover.Rover(origine, planète, xOrigine, yOrigine);
 
         // QUAND il avance ou recule <taille> fois
-        var roverFinal = roverInitial;
+        IRover roverFinal = roverInitial;
         for(var mouvements = 0; mouvements < taille; mouvements ++)
             roverFinal = avancer ? roverFinal.Avancer() : roverFinal.Reculer();
 
@@ -71,7 +72,7 @@ public class GéométrieToroïdaleTest
         var roverInitial = new Rover.Rover(origine, planète, xOrigine, yOrigine);
 
         // QUAND il avance ou recule <taille - 1> fois
-        var roverFinal = roverInitial;
+        IRover roverFinal = roverInitial;
         for(var mouvements = 1; mouvements < taille; mouvements ++)
             roverFinal = avancer ? roverFinal.Avancer() : roverFinal.Reculer();
 

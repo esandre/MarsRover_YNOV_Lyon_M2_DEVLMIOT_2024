@@ -1,4 +1,5 @@
-﻿using MarsRover.Test.Utilities;
+﻿using MarsRover.Rover;
+using MarsRover.Test.Utilities;
 using MarsRover.Topologie;
 
 namespace MarsRover.Test;
@@ -18,7 +19,7 @@ public class ReculerTest
     public void Reculer_Equivaut_A_Avancer_Depuis_Opposé(Orientation origine, Orientation opposée)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var roverTesté = new Rover.Rover(origine, new PlanèteInfinie());
+        IRover roverTesté = new Rover.Rover(origine, new PlanèteInfinie());
 
         // QUAND il recule
         roverTesté = roverTesté.Reculer();

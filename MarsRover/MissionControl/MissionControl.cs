@@ -6,9 +6,9 @@ namespace MarsRover.MissionControl;
 public class MissionControl
 {
     private readonly ICommandSender _commandSender;
-    private Rover.Rover _roverContrôlé;
+    private IRover _roverContrôlé;
 
-    public MissionControl(ICommandSender commandSender, Rover.Rover roverContrôlé)
+    public MissionControl(ICommandSender commandSender, IRover roverContrôlé)
     {
         _commandSender = commandSender;
         _roverContrôlé = roverContrôlé;
