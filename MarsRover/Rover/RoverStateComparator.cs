@@ -1,4 +1,4 @@
-﻿namespace MarsRover;
+﻿namespace MarsRover.Rover;
 
 internal class RoverStateComparator : IEqualityComparer<Rover>
 {
@@ -9,8 +9,8 @@ internal class RoverStateComparator : IEqualityComparer<Rover>
         if (ReferenceEquals(second, null)) return false;
         if (first.GetType() != second.GetType()) return false;
 
-        return first.Orientation.Equals(second.Orientation) 
-               && first.Y == second.Y 
+        return first.Orientation.Equals(second.Orientation)
+               && first.Y == second.Y
                && first.X == second.X;
     }
 

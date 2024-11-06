@@ -1,4 +1,6 @@
-﻿namespace MarsRover;
+﻿using MarsRover.Topologie;
+
+namespace MarsRover.Rover;
 
 public class Rover
 {
@@ -26,8 +28,8 @@ public class Rover
 
         var positionNormalisée = _planète.Normaliser(positionX, positionY);
 
-        return !positionNormalisée.Libre 
-            ? this 
+        return !positionNormalisée.Libre
+            ? this
             : new Rover(Orientation, _planète, positionNormalisée.X, positionNormalisée.Y);
     }
 

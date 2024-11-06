@@ -1,4 +1,4 @@
-﻿namespace MarsRover;
+﻿namespace MarsRover.Rover;
 
 public static class RoverInterpreter
 {
@@ -19,7 +19,7 @@ public static class RoverInterpreter
         foreach (var @char in command)
         {
             var roverFinal = rover.Recevoir(@char);
-            if (Comparer.Equals(rover, roverFinal)) 
+            if (Comparer.Equals(rover, roverFinal))
                 return rover;
 
             rover = roverFinal;
