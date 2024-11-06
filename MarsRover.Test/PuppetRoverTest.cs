@@ -5,19 +5,20 @@ namespace MarsRover.Test;
 
 public class PuppetRoverTest
 {
-    [Fact]
-    public void Commande_Recue_Equivalente()
+    [Theory]
+    [InlineData("A")]
+    [InlineData("RG")]
+    public void Commande_Recue_Equivalente(string command)
     {
-        // ETANT DONNE un PuppetRover
-        var rover = new RoverSpy();
+        // ETANT DONNE un PuppetRover abonné à listener
+        var rover = new RoverSpy(new RoverBuilder().Build());
         var fakeCommandListener = new FakeCommandListener();
-        var puppetRover = new PuppetRover(rover, fakeCommandListener);
+        var _ = new PuppetRover(rover, fakeCommandListener);
 
-        // QUAND il reçoit une commande
-        fakeCommandListener.SimulerReceptionCommande('A');
-        puppetRover.StartListening();
+        // QUAND le listener reçoit une commande
+        fakeCommandListener.SimulerReceptionCommande(command);
 
         // ALORS cette commande est transmise au Rover sous-jacent
-        Assert.Equal('A', rover.LastReceivedCommand);
+        Assert.Equal(command, rover.AllReceivedCommands);
     }
 }

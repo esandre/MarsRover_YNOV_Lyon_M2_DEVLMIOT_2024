@@ -5,33 +5,48 @@ namespace MarsRover.Test.Utilities;
 
 internal class RoverSpy : IRover
 {
+    private readonly IRover _behavior;
+
+    public RoverSpy(IRover behavior)
+    {
+        _behavior = behavior;
+        _allReceivedCommands = [];
+    }
+
+    private RoverSpy(IRover behavior, IList<char> alreadyReceivedCommands)
+    {
+        _behavior = behavior;
+        _allReceivedCommands = alreadyReceivedCommands;
+    }
+
     public IRover Avancer()
     {
-        LastReceivedCommand = 'A';
-        return this;
+        _allReceivedCommands.Add('A');
+        return new RoverSpy(_behavior.Avancer(), _allReceivedCommands);
     }
 
     public IRover Reculer()
     {
-        LastReceivedCommand = 'R';
-        return this;
+        _allReceivedCommands.Add('R');
+        return new RoverSpy(_behavior.Avancer(), _allReceivedCommands);
     }
 
     public IRover TournerADroite()
     {
-        LastReceivedCommand = 'D';
-        return this;
+        _allReceivedCommands.Add('D');
+        return new RoverSpy(_behavior.Avancer(), _allReceivedCommands);
     }
 
     public IRover TournerAGauche()
     {
-        LastReceivedCommand = 'G';
-        return this;
+        _allReceivedCommands.Add('G');
+        return new RoverSpy(_behavior.Avancer(), _allReceivedCommands);
     }
 
-    public Orientation Orientation { get; }
-    public int Y { get; }
-    public int X { get; }
+    public Orientation Orientation => _behavior.Orientation;
+    public int Y => _behavior.Y;
+    public int X => _behavior.X;
 
-    public char LastReceivedCommand { get; private set; }
+    private readonly IList<char> _allReceivedCommands;
+    public string AllReceivedCommands => new(_allReceivedCommands.ToArray());
 }
