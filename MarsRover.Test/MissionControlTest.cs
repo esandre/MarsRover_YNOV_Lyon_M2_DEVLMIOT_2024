@@ -34,7 +34,7 @@ public class MissionControlTest
         // ETANT DONNE un MissionControl connecté à un Rover
         var roverTesté = preconfiguredCase.Build();
         var roverTémoin = preconfiguredCase.Build();
-        var missionControl = new MissionControl.MissionControl(roverTesté);
+        var missionControl = new MissionControl.MissionControl(new CommandSenderSpy(), roverTesté);
 
         // QUAND on donne deux ordres à la suite
         missionControl.Envoyer(action1);
@@ -46,5 +46,21 @@ public class MissionControlTest
         Assert.Equal(roverTémoin.Orientation, roverState.Orientation);
         Assert.Equal(roverTémoin.X, roverState.X);
         Assert.Equal(roverTémoin.Y, roverState.Y);
+    }
+
+    [Fact]
+    public void MissionControl_Envoie_Message()
+    {
+        // ETANT DONNE un MissionControl ayant un CommandSender
+        var commandSender = new CommandSenderSpy();
+        var missionControl = new MissionControl.MissionControl(
+            commandSender, 
+            new RoverBuilder().Build());
+
+        // QUAND le MissionControl doit envoyer une commande
+        missionControl.Envoyer('A');
+
+        // ALORS un message est vraiment envoyé au CommandSender
+        Assert.Contains('A', commandSender.ReceivedCommands);
     }
 }
