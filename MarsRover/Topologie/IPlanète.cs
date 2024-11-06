@@ -1,4 +1,4 @@
-﻿namespace MarsRover;
+﻿namespace MarsRover.Topologie;
 
 public interface IPlanète
 {

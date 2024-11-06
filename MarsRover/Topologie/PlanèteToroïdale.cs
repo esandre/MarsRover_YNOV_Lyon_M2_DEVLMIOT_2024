@@ -1,4 +1,4 @@
-﻿namespace MarsRover;
+﻿namespace MarsRover.Topologie;
 
 public class PlanèteToroïdale : IPlanète
 {
@@ -21,6 +21,6 @@ public class PlanèteToroïdale : IPlanète
 
     private static int AbsoluteModulo(int x, int mod)
     {
-        return ((x + mod) % mod) % -mod;
+        return (x + mod) % mod % -mod;
     }
 }

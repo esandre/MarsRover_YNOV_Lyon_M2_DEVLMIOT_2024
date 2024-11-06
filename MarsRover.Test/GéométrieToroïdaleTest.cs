@@ -1,4 +1,6 @@
-﻿namespace MarsRover.Test;
+﻿using MarsRover.Topologie;
+
+namespace MarsRover.Test;
 
 public class GéométrieToroïdaleTest
 {

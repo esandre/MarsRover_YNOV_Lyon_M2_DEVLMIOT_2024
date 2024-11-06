@@ -1,4 +1,4 @@
-﻿namespace MarsRover;
+﻿namespace MarsRover.Topologie;
 
 internal class PlanèteAvecObstacle : IPlanète
 {
@@ -13,7 +13,7 @@ internal class PlanèteAvecObstacle : IPlanète
         _obstacle = new Obstacle(coordonnéesObstacleNormalisée.X, coordonnéesObstacleNormalisée.Y);
     }
 
-    public (int X, int Y, bool Libre) Normaliser(int x, int y) 
+    public (int X, int Y, bool Libre) Normaliser(int x, int y)
         => _inner.Normaliser(x, y) with { Libre = !_obstacle.Collisionne(x, y) };
 }
 

@@ -1,4 +1,6 @@
-﻿namespace MarsRover.Test.Utilities;
+﻿using MarsRover.Topologie;
+
+namespace MarsRover.Test.Utilities;
 
 internal class PlanèteInfinie : IPlanète
 {
