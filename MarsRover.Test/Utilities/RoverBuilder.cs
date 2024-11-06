@@ -2,7 +2,7 @@
 
 namespace MarsRover.Test.Utilities;
 
-internal class RoverBuilder
+public class RoverBuilder
 {
     private Orientation _orientation = Orientation.Nord;
     private readonly List<Obstacle> _obstacles = [];
