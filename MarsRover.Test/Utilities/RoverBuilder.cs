@@ -10,13 +10,13 @@ internal class RoverBuilder
     private int _y;
     private IPlanète _planète = new PlanèteInfinie();
 
-    public Rover Build()
+    public Rover.Rover Build()
     {
         var planète = _planète;
         foreach (var obstacle in _obstacles)
             planète = planète.AjouterObstacle(obstacle);
 
-        return new Rover(_orientation, planète, _x, _y);
+        return new Rover.Rover(_orientation, planète, _x, _y);
     }
 
     public RoverBuilder Orienté(Orientation orientation)

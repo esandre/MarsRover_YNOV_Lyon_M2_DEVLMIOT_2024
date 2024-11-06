@@ -33,7 +33,7 @@ public class GéométrieToroïdaleTest
         var planète = new PlanèteToroïdale(taille);
 
         // ET un Rover orienté <origine> positionné <xOrigine>, <yOrigine> sur cette planète
-        var roverInitial = new Rover(origine, planète, xOrigine, yOrigine);
+        var roverInitial = new Rover.Rover(origine, planète, xOrigine, yOrigine);
 
         // QUAND il avance ou recule <taille> fois
         var roverFinal = roverInitial;
@@ -68,7 +68,7 @@ public class GéométrieToroïdaleTest
         var planète = new PlanèteToroïdale(taille);
 
         // ET un Rover orienté <origine> positionné <xOrigine>, <yOrigine> sur cette planète
-        var roverInitial = new Rover(origine, planète, xOrigine, yOrigine);
+        var roverInitial = new Rover.Rover(origine, planète, xOrigine, yOrigine);
 
         // QUAND il avance ou recule <taille - 1> fois
         var roverFinal = roverInitial;

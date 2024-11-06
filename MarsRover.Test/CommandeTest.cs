@@ -8,15 +8,15 @@ public class CommandeTest
 {
     public static IEnumerable<object[]> Cas_CommandeEquivalenteAAction()
     {
-        yield return ['A', (Func<Rover, Rover>) (rover => rover.Avancer())];
-        yield return ['R', (Func<Rover, Rover>) (rover => rover.Reculer())];
-        yield return ['D', (Func<Rover, Rover>) (rover => rover.TournerADroite())];
-        yield return ['G', (Func<Rover, Rover>) (rover => rover.TournerAGauche())];
+        yield return ['A', (Func<Rover.Rover, Rover.Rover>) (rover => rover.Avancer())];
+        yield return ['R', (Func<Rover.Rover, Rover.Rover>) (rover => rover.Reculer())];
+        yield return ['D', (Func<Rover.Rover, Rover.Rover>) (rover => rover.TournerADroite())];
+        yield return ['G', (Func<Rover.Rover, Rover.Rover>) (rover => rover.TournerAGauche())];
     }
 
     [Theory]
     [MemberData(nameof(Cas_CommandeEquivalenteAAction))]
-    public void CommandeEquivalenteAAction(char commande, Func<Rover, Rover> action)
+    public void CommandeEquivalenteAAction(char commande, Func<Rover.Rover, Rover.Rover> action)
     {
         // ETANT DONNE un Rover
         var builder = new RoverBuilder();

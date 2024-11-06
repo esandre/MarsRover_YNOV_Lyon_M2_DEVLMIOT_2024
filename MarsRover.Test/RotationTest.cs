@@ -23,7 +23,7 @@ public class RotationTest
     public void Tourner_A_Droite(Orientation origine, Orientation destination)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var rover = new Rover(origine, new PlanèteInfinie());
+        var rover = new Rover.Rover(origine, new PlanèteInfinie());
 
         // QUAND il tourne à droite
         rover = rover.TournerADroite();
@@ -37,7 +37,7 @@ public class RotationTest
     public void Tourner_A_Gauche(Orientation origine, Orientation destination)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var rover = new Rover(origine, new PlanèteInfinie());
+        var rover = new Rover.Rover(origine, new PlanèteInfinie());
 
         // QUAND il tourne à gauche
         rover = rover.TournerAGauche();
@@ -64,7 +64,7 @@ public class RotationTest
     public void Tourner_Ne_Fait_Pas_Bouger(Orientation origine, int xOrigine, int yOrigine, bool aGauche)
     {
         // ETANT DONNE un Rover orienté <origine>
-        var roverInitial = new Rover(origine, new PlanèteInfinie(), xOrigine, yOrigine);
+        var roverInitial = new Rover.Rover(origine, new PlanèteInfinie(), xOrigine, yOrigine);
 
         // QUAND il tourne
         var roverFinal = aGauche ? roverInitial.TournerAGauche() : roverInitial.TournerADroite();
