@@ -22,14 +22,14 @@ public class MissionControlTest
                 .Orienté(orientationDépart)
                 .Positionné(xDépart, yDépart);
 
-            yield return [builder, action1, action2];
+            yield return [builder, action1 + "", action2 + ""];
         }
     }
 
     [Theory]
     [MemberData(nameof(Cas_Avancer_Equivalent_Avec_MissionControl))]
     public void Avancer_Equivalent_Avec_MissionControl(
-        RoverBuilder preconfiguredCase, char action1, char action2)
+        RoverBuilder preconfiguredCase, string action1, string action2)
     {
         // ETANT DONNE un MissionControl connecté à un Rover
         var roverTesté = preconfiguredCase.Build();
@@ -58,9 +58,9 @@ public class MissionControlTest
             new RoverBuilder().Build());
 
         // QUAND le MissionControl doit envoyer une commande
-        missionControl.Envoyer('A');
+        missionControl.Envoyer("A");
 
         // ALORS un message est vraiment envoyé au CommandSender
-        Assert.Contains('A', commandSender.ReceivedCommands);
+        Assert.Contains("A", commandSender.ReceivedCommands);
     }
 }

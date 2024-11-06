@@ -12,11 +12,11 @@ public class PuppetRoverTest
     {
         // ETANT DONNE un PuppetRover abonné à listener
         var rover = new RoverSpy(new RoverBuilder().Build());
-        var fakeCommandListener = new FakeCommandListener();
+        var fakeCommandListener = new FakeCommunication();
         var _ = new PuppetRover(rover, fakeCommandListener);
 
         // QUAND le listener reçoit une commande
-        fakeCommandListener.SimulerReceptionCommande(command);
+        fakeCommandListener.SendAsync(command);
 
         // ALORS cette commande est transmise au Rover sous-jacent
         Assert.Equal(command, rover.AllReceivedCommands);

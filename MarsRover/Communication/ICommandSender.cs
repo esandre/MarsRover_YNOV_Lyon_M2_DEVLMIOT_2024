@@ -2,5 +2,5 @@
 
 public interface ICommandSender
 {
-    Task SendAsync(char action);
+    Task SendAsync(string action);
 }
