@@ -10,16 +10,18 @@ public class CommunicationIntegrationTest
     {
         var commonBuilder = new RoverBuilder();
         const string commande = "A";
-        var fakeCommunication = new FakeCommunication();
+        const string configuration = "x";
 
         {
+            var fakeCommunicationServerSide = new FakeCommunication(configuration);
             var roverSurMars = commonBuilder.Build();
-            var _ = new PuppetRover(roverSurMars, fakeCommunication);
+            var _ = new PuppetRover(roverSurMars, fakeCommunicationServerSide);
         }
 
         {
+            var fakeCommunicationClientSide = new FakeCommunication(configuration);
             var missionControl = new MissionControl.MissionControl(
-                fakeCommunication,commonBuilder.Build());
+                fakeCommunicationClientSide,commonBuilder.Build());
             var returnedState = missionControl.Envoyer(commande);
 
             var roverTémoin = commonBuilder.Build();

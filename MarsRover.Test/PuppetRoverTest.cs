@@ -12,7 +12,7 @@ public class PuppetRoverTest
     {
         // ETANT DONNE un PuppetRover abonné à listener
         var rover = new RoverSpy(new RoverBuilder().Build());
-        var fakeCommandListener = new FakeCommunication();
+        var fakeCommandListener = new FakeCommunication("");
         var _ = new PuppetRover(rover, fakeCommandListener);
 
         // QUAND le listener reçoit une commande

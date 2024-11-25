@@ -4,16 +4,23 @@ namespace MarsRover.Test.Utilities;
 
 internal class FakeCommunication : ICommandListener, ICommandSender
 {
-    private Action<string> _callback = _ => { };
+    private readonly string _channelName;
+
+    public FakeCommunication(string channelName)
+    {
+        _channelName = channelName;
+    }
+
+    private static readonly Dictionary<string, Action<string>> Callbacks = new();
 
     public void Subscribe(Action<string> whatToDoWhenCommandReceived)
     {
-        _callback = whatToDoWhenCommandReceived;
+        Callbacks[_channelName] = whatToDoWhenCommandReceived;
     }
 
     public Task SendAsync(string action)
     {
-        _callback(action);
+        Callbacks[_channelName](action);
         return Task.CompletedTask;
     }
 }
