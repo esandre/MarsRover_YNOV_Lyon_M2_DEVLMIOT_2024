@@ -2,5 +2,5 @@
 
 public interface ICommandListener
 {
-    void Subscribe(Action<string> whatToDoWhenCommandReceived);
+    void Subscribe(Func<string, RoverState> whatToDoWhenCommandReceived);
 }

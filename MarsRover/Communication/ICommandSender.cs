@@ -2,5 +2,5 @@
 
 public interface ICommandSender
 {
-    Task SendAsync(string action);
+    Task<RoverState> SendAsync(string action);
 }

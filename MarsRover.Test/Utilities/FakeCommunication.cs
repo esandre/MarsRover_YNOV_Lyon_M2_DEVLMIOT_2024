@@ -11,16 +11,15 @@ internal class FakeCommunication : ICommandListener, ICommandSender
         _channelName = channelName;
     }
 
-    private static readonly Dictionary<string, Action<string>> Callbacks = new();
+    private static readonly Dictionary<string, Func<string, RoverState>> Callbacks = new();
 
-    public void Subscribe(Action<string> whatToDoWhenCommandReceived)
+    public void Subscribe(Func<string, RoverState> whatToDoWhenCommandReceived)
     {
         Callbacks[_channelName] = whatToDoWhenCommandReceived;
     }
 
-    public Task SendAsync(string action)
+    public Task<RoverState> SendAsync(string action)
     {
-        Callbacks[_channelName](action);
-        return Task.CompletedTask;
+        return Task.FromResult(Callbacks[_channelName](action));
     }
 }

@@ -8,9 +8,9 @@ public class CommandSenderSpy : ICommandSender
 
     private readonly List<string> _receivedCommands = [];
 
-    public Task SendAsync(string action)
+    public Task<RoverState> SendAsync(string action)
     {
         _receivedCommands.Add(action);
-        return Task.CompletedTask;
+        return Task.FromResult(new RoverState());
     }
 }

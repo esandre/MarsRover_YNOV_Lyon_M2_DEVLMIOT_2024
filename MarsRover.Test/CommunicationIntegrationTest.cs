@@ -19,13 +19,17 @@ public class CommunicationIntegrationTest
         var commonBuilder = new RoverBuilder();
         const string commande = "A";
 
+        CommandListenerSpy serverSideSpy;
+
         {
             var fakeCommunicationServerSide = (ICommandListener) Activator.CreateInstance(
                 communicationStackType, 
                 commonConfiguration)!;
+
+            serverSideSpy = new CommandListenerSpy(fakeCommunicationServerSide);
                 
             var roverSurMars = commonBuilder.Build();
-            var _ = new PuppetRover(roverSurMars, fakeCommunicationServerSide);
+            var _ = new PuppetRover(roverSurMars, serverSideSpy);
         }
 
         {
@@ -44,6 +48,8 @@ public class CommunicationIntegrationTest
             Assert.Equal(roverTémoin.Orientation, returnedState.Orientation);
             Assert.Equal(roverTémoin.X, returnedState.X);
             Assert.Equal(roverTémoin.Y, returnedState.Y);
+
+            Assert.Equal(returnedState, serverSideSpy.LastReturnedState);
         }
     }
 }

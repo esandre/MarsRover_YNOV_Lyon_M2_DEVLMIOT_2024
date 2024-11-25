@@ -6,6 +6,7 @@ public class PuppetRover
 {
     public PuppetRover(IRover rover, ICommandListener commandListener)
     {
-        commandListener.Subscribe(command => rover.Recevoir(command));
+        commandListener.Subscribe(command 
+            => RoverState.FromRover(rover.Recevoir(command)));
     }
 }
