@@ -8,7 +8,8 @@ public class CommunicationIntegrationTest
 {
     public static IEnumerable<object[]> Cas_Communicates()
     {
-        yield return [typeof(FakeCommunication), ""];
+        yield return [typeof(FakeCommunication), nameof(FakeCommunication)];
+        yield return [typeof(SocketCommunication), "127.0.0.1:12789"];
     }
 
     [Theory]
