@@ -1,27 +1,40 @@
-﻿using MarsRover.Rover;
+﻿using MarsRover.Communication;
+using MarsRover.Rover;
 using MarsRover.Test.Utilities;
 
 namespace MarsRover.Test;
 
 public class CommunicationIntegrationTest
 {
-    [Fact]
-    public void Communicates()
+    public static IEnumerable<object[]> Cas_Communicates()
+    {
+        yield return [typeof(FakeCommunication), ""];
+    }
+
+    [Theory]
+    [MemberData(nameof(Cas_Communicates))]
+    public void Communicates(Type communicationStackType, string commonConfiguration)
     {
         var commonBuilder = new RoverBuilder();
         const string commande = "A";
-        const string configuration = "x";
 
         {
-            var fakeCommunicationServerSide = new FakeCommunication(configuration);
+            var fakeCommunicationServerSide = (ICommandListener) Activator.CreateInstance(
+                communicationStackType, 
+                commonConfiguration)!;
+                
             var roverSurMars = commonBuilder.Build();
             var _ = new PuppetRover(roverSurMars, fakeCommunicationServerSide);
         }
 
         {
-            var fakeCommunicationClientSide = new FakeCommunication(configuration);
+            var fakeCommunicationClientSide = (ICommandSender)Activator.CreateInstance(
+                communicationStackType,
+                commonConfiguration)!;
+
             var missionControl = new MissionControl.MissionControl(
                 fakeCommunicationClientSide,commonBuilder.Build());
+
             var returnedState = missionControl.Envoyer(commande);
 
             var roverTémoin = commonBuilder.Build();
