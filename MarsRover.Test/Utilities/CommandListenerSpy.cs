@@ -8,7 +8,7 @@ internal class CommandListenerSpy : ICommandListener
     private readonly ICommandListener _behavior;
     private readonly ConcurrentStack<(string, RoverState)> _invocations;
 
-    public RoverState LastReturnedState => _invocations.Last().Item2;
+    public RoverState? LastReturnedState => _invocations.LastOrDefault().Item2;
 
     public CommandListenerSpy(ICommandListener behavior)
     {
