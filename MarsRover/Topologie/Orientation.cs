@@ -11,26 +11,21 @@ public class Orientation
         VecteurY = vecteurY;
     }
 
-    public static Orientation Sud { get; } = new('S', -1, 0);
-    public static Orientation Nord { get; } = new('N', 1, 0);
-    public static Orientation Est { get; } = new('E', 0, 1);
-    public static Orientation Ouest { get; } = new('O', 0, -1);
+    public static Orientation Sud { get; } = new('S', 0, -1);
+    public static Orientation Nord { get; } = new('N', 0, 1);
+    public static Orientation Est { get; } = new('E', 1, 0);
+    public static Orientation Ouest { get; } = new('O', -1, 0);
 
     internal static Orientation Parse(char letter)
     {
-        switch (letter)
+        return letter switch
         {
-            case 'S':
-                return Sud;
-            case 'N':
-                return Nord;
-            case 'E':
-                return Est;
-            case 'O':
-                return Ouest;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+            'S' => Sud,
+            'N' => Nord,
+            'E' => Est,
+            'O' => Ouest,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
     internal int VecteurX { get; }

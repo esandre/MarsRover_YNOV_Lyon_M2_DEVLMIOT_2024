@@ -9,8 +9,8 @@ public class ObstaclesTest
     [Fact]
     public void ObstacleSimple()
     {
-        // ETANT DONNE un obstacle en 1,0
-        var obstacle = new Obstacle(1, 0);
+        // ETANT DONNE un obstacle en 0,1
+        var obstacle = new Obstacle(0, 1);
 
         // ET un Rover orienté Nord en 0,0
         var roverInitial = new RoverBuilder()
