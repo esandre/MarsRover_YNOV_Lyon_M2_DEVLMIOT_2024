@@ -14,9 +14,9 @@ public class MissionControl
         _roverContrôlé = roverContrôlé;
     }
 
-    public RoverState Envoyer(string action)
+    public async Task<RoverState> EnvoyerAsync(string action)
     {
-        _commandSender.SendAsync(action);
+        await _commandSender.SendAsync(action);
 
         _roverContrôlé = _roverContrôlé.Recevoir(action);
         return new RoverState(_roverContrôlé.X, _roverContrôlé.Y, _roverContrôlé.Orientation);

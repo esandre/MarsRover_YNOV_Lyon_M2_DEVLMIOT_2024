@@ -13,7 +13,7 @@ public class CommunicationIntegrationTest
 
     [Theory]
     [MemberData(nameof(Cas_Communicates))]
-    public void Communicates(Type communicationStackType, string commonConfiguration)
+    public async Task Communicates(Type communicationStackType, string commonConfiguration)
     {
         var commonBuilder = new RoverBuilder();
         const string commande = "A";
@@ -39,7 +39,7 @@ public class CommunicationIntegrationTest
             var missionControl = new MissionControl.MissionControl(
                 fakeCommunicationClientSide,commonBuilder.Build());
 
-            var returnedState = missionControl.Envoyer(commande);
+            var returnedState = await missionControl.EnvoyerAsync(commande);
 
             var roverTémoin = commonBuilder.Build();
             roverTémoin = roverTémoin.Recevoir(commande);

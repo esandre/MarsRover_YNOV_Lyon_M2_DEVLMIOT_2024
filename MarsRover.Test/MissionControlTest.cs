@@ -28,7 +28,7 @@ public class MissionControlTest
 
     [Theory]
     [MemberData(nameof(Cas_Avancer_Equivalent_Avec_MissionControl))]
-    public void Avancer_Equivalent_Avec_MissionControl(
+    public async Task Avancer_Equivalent_Avec_MissionControl(
         RoverBuilder preconfiguredCase, string action1, string action2)
     {
         // ETANT DONNE un MissionControl connecté à un Rover
@@ -37,8 +37,8 @@ public class MissionControlTest
         var missionControl = new MissionControl.MissionControl(new CommandSenderSpy(), roverTesté);
 
         // QUAND on donne deux ordres à la suite
-        missionControl.Envoyer(action1);
-        var roverState = missionControl.Envoyer(action2);
+        await missionControl.EnvoyerAsync(action1);
+        var roverState = await missionControl.EnvoyerAsync(action2);
 
         // ALORS le résultat est le même que sur un Rover appelé directement
         roverTémoin = roverTémoin.Recevoir(action1);
@@ -49,7 +49,7 @@ public class MissionControlTest
     }
 
     [Fact]
-    public void MissionControl_Envoie_Message()
+    public async Task MissionControl_Envoie_Message()
     {
         // ETANT DONNE un MissionControl ayant un CommandSender
         var commandSender = new CommandSenderSpy();
@@ -58,7 +58,7 @@ public class MissionControlTest
             new RoverBuilder().Build());
 
         // QUAND le MissionControl doit envoyer une commande
-        missionControl.Envoyer("A");
+        await missionControl.EnvoyerAsync("A");
 
         // ALORS un message est vraiment envoyé au CommandSender
         Assert.Contains("A", commandSender.ReceivedCommands);
