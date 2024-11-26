@@ -1,4 +1,5 @@
-﻿using MarsRover.Test.Utilities;
+﻿using MarsRover.Rover;
+using MarsRover.Test.Utilities;
 using MarsRover.Topologie;
 
 namespace MarsRover.Test;
@@ -25,6 +26,38 @@ public class ObstaclesTest
         Assert.Equal(roverInitial.X, roverFinal.X);
         Assert.Equal(roverInitial.Y, roverFinal.Y);
         Assert.Equal(roverInitial.Orientation, roverFinal.Orientation);
+    }
+
+    [Fact]
+    public void PlusieursObstacles()
+    {
+        // ETANT DONNE un Rover en 1,1
+        // ET 4 obstacles l'entourant
+        var roverInitial = new RoverBuilder()
+            .Positionné(1, 1)
+            .AjouterObstacleSurPlanète(new Obstacle(1, 0))
+            .AjouterObstacleSurPlanète(new Obstacle(0, 1))
+            .AjouterObstacleSurPlanète(new Obstacle(2, 1))
+            .AjouterObstacleSurPlanète(new Obstacle(1, 2))
+            .Build();
+
+        // QUAND le Rover avance quelque soit la direction
+        IRover[] roversAux4Directions =
+        [
+            roverInitial,
+            roverInitial.TournerADroite(),
+            roverInitial.TournerADroite().TournerADroite(),
+            roverInitial.TournerADroite().TournerADroite().TournerADroite()
+        ];
+
+        roversAux4Directions = roversAux4Directions.Select(rover => rover.Avancer()).ToArray();
+
+        // ALORS il conserve sa position
+        foreach (var rover in roversAux4Directions)
+        {
+            Assert.Equal(roverInitial.X, rover.X);
+            Assert.Equal(roverInitial.Y, rover.Y);
+        }
     }
 
     [Fact]

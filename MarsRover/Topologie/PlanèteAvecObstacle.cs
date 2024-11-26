@@ -14,7 +14,12 @@ internal class PlanèteAvecObstacle : IPlanète
     }
 
     public (int X, int Y, bool Libre) Normaliser(int x, int y)
-        => _inner.Normaliser(x, y) with { Libre = !_obstacle.Collisionne(x, y) };
+    {
+        var innerValue = _inner.Normaliser(x, y);
+        var collisionne = _obstacle.Collisionne(innerValue.X, innerValue.Y);
+        if (collisionne) return innerValue with { Libre = false };
+        return innerValue;
+    }
 }
 
 public record Obstacle(int X, int Y)
