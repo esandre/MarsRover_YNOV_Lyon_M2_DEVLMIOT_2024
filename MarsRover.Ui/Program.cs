@@ -11,9 +11,20 @@ var planète = new PlanèteToroïdale(8)
     .AjouterObstacle(new Obstacle(7,4))
     .AjouterObstacle(new Obstacle(3,3));
 
-var rover = new Rover(Orientation.Est, planète, 1, 1);
+IRover rover = new Rover(Orientation.Est, planète, 1, 1);
 
-var carte = new Carte(planète)
-    .Représenter(rover);
+while (true)
+{
+    Console.SetCursorPosition(0, 0);
 
-Console.Write(carte);
+    var carte = new Carte(planète)
+        .Représenter(rover);
+
+    Console.Write(carte);
+
+    var key = Console.ReadKey().KeyChar;
+    var command = key.ToString().ToUpperInvariant().Single();
+
+    rover = rover.Recevoir(command);
+}
+
