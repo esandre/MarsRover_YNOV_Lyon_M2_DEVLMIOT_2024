@@ -67,16 +67,34 @@ namespace MarsRover.Ui.Test
         public void AffichageRoverSeulTaille2Zero()
         {
             // ETANT DONNE une planète de taille 2
-            // ET un rover orienté nord en 1,1
+            // ET un rover orienté nord en 0,0
             var planète = new PlanèteToroïdale(2);
             var rover = new Rover.Rover(Orientation.Nord, planète, 0, 0);
 
             // QUAND on les représente
             var representation = new Carte(planète).Représenter(rover).ToString();
 
-            // ALORS on obtient le symbole rover en haut à droite
+            // ALORS on obtient le symbole rover en bas à gauche
             var attendu = Symboles.CaseDécouverteLibre + "" + Symboles.CaseDécouverteLibre + Environment.NewLine + 
                           Symboles.CaseRoverNord + "" + Symboles.CaseDécouverteLibre + Environment.NewLine;
+
+            Assert.Equal(attendu, representation);
+        }
+
+        [Fact]
+        public void AffichageRoverSeulTaille2ZeroUn()
+        {
+            // ETANT DONNE une planète de taille 2
+            // ET un rover orienté nord en 0,1
+            var planète = new PlanèteToroïdale(2);
+            var rover = new Rover.Rover(Orientation.Nord, planète, 0, 1);
+
+            // QUAND on les représente
+            var representation = new Carte(planète).Représenter(rover).ToString();
+
+            // ALORS on obtient le symbole rover en bas à gauche
+            var attendu = Symboles.CaseRoverNord + "" + Symboles.CaseDécouverteLibre + Environment.NewLine + 
+                          Symboles.CaseDécouverteLibre + "" + Symboles.CaseDécouverteLibre + Environment.NewLine;
 
             Assert.Equal(attendu, representation);
         }
@@ -114,6 +132,25 @@ namespace MarsRover.Ui.Test
             // ALORS on obtient le symbole obstacle seul entouré de 3 cases vides
             var attendu = 
                 Symboles.CaseDécouverteLibre + "" + Symboles.CaseDécouverteObstacle + Environment.NewLine +
+                Symboles.CaseDécouverteLibre + "" + Symboles.CaseDécouverteLibre + Environment.NewLine;
+
+            Assert.Equal(attendu, representation);
+        }
+
+        [Fact]
+        public void AffichageObstacleSurTaille2X1()
+        {
+            // ETANT DONNE une planète de taille 2
+            // ET un obstacle en 1,1
+            var planète = new PlanèteToroïdale(2)
+                .AjouterObstacle(new Obstacle(0, 1));
+
+            // QUAND on la représente
+            var representation = new Carte(planète).ToString();
+
+            // ALORS on obtient le symbole obstacle est en haut à gauche
+            var attendu = 
+                Symboles.CaseDécouverteObstacle + "" + Symboles.CaseDécouverteLibre + Environment.NewLine +
                 Symboles.CaseDécouverteLibre + "" + Symboles.CaseDécouverteLibre + Environment.NewLine;
 
             Assert.Equal(attendu, representation);

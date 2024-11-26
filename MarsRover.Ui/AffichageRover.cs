@@ -17,8 +17,8 @@ public class AffichageRover
     public override string ToString()
     {
         var lignes = _carte.ToString().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
-        var noLigne = lignes.Length - 1 - _roverState.X;
-        var noColonne = _roverState.Y * 2;
+        var noLigne = lignes.Length - 1 - _roverState.Y;
+        var noColonne = _roverState.X * 2;
 
         lignes[noLigne] = lignes[noLigne]
             .Remove(noColonne, 2)

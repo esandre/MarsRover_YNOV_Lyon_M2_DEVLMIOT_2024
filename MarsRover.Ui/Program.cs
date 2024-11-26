@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using MarsRover;
 using MarsRover.Rover;
 using MarsRover.Topologie;
 using MarsRover.Ui;
@@ -23,8 +24,21 @@ while (true)
     Console.Write(carte);
 
     var key = Console.ReadKey().KeyChar;
+
+    Console.WriteLine();
+
     var command = key.ToString().ToUpperInvariant().Single();
 
-    rover = rover.Recevoir(command);
+    try
+    {
+        var previous = RoverState.FromRover(rover);
+        rover = rover.Recevoir(command);
+        var @new = RoverState.FromRover(rover);
+        Console.WriteLine(previous + " => " + @new);
+    }
+    catch
+    {
+        Console.WriteLine("Commande invalide");
+    }
 }
 
